@@ -17,16 +17,20 @@ public class Carro {
     @EqualsAndHashCode.Exclude
     private Long id;
     @Column(nullable = false)
-    private String nome;
+    private String modelo;
     @Column(nullable = false)
     private String marca;
-    @Column(nullable = false)
-    private String tipo;
     @Column(nullable = false)
     private Integer anoFabricacao;
     @Column(nullable = false)
     private BigDecimal preco;
     @Column(nullable = false)
     private String cor;
+    @Column(nullable = false, precision = 12, scale = 2)
+    private BigDecimal quilometragem;
+    @Column(nullable = false)
+    private String statusDisponibilidade;
+    @Column(nullable = false)
+    private String urlImg;
 
 }

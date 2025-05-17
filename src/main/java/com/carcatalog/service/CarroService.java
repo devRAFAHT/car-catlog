@@ -23,13 +23,6 @@ public class CarroService {
     public Carro create(Carro carro) {
         log.info("Criando novo carro: {}", carro);
 
-        boolean exists = repository.findByNomeAndMarcaAndTipoAndAnoFabricacaoAndPrecoAndCor(carro.getNome(), carro.getMarca(), carro.getTipo(), carro.getAnoFabricacao(), carro.getPreco(), carro.getCor()).isPresent();
-
-        if (exists) {
-            log.error("Já existe um carro com os dados fornecidos: {}", carro);
-            throw new CarAlreadyExistsException("Já existe um carro com esses dados.");
-        }
-
         carro = repository.save(carro);
         log.info("Carro salvo com sucesso: {}", carro);
         return carro;
@@ -40,19 +33,15 @@ public class CarroService {
         log.info("Atualizando carro com ID: {}", id);
         Carro carro = findById(id);
 
-        boolean exists = repository.findByNomeAndMarcaAndTipoAndAnoFabricacaoAndPrecoAndCor(novoCarro.getNome(), novoCarro.getMarca(), novoCarro.getTipo(), novoCarro.getAnoFabricacao(), novoCarro.getPreco(), novoCarro.getCor()).filter(c -> !c.getId().equals(id)).isPresent();
-
-        if (exists) {
-            log.error("Já existe um carro com os dados fornecidos: {}", novoCarro);
-            throw new CarAlreadyExistsException("Já existe um carro com esses dados.");
-        }
-
-        carro.setNome(novoCarro.getNome());
-        carro.setPreco(novoCarro.getPreco());
-        carro.setAnoFabricacao(novoCarro.getAnoFabricacao());
-        carro.setTipo(novoCarro.getTipo());
+        carro.setModelo(novoCarro.getModelo());
         carro.setMarca(novoCarro.getMarca());
+        carro.setAnoFabricacao(novoCarro.getAnoFabricacao());
+        carro.setPreco(novoCarro.getPreco());
         carro.setCor(novoCarro.getCor());
+        carro.setQuilometragem(novoCarro.getQuilometragem());
+        carro.setStatusDisponibilidade(novoCarro.getStatusDisponibilidade());
+        carro.setUrlImg(novoCarro.getUrlImg());
+
 
         carro = repository.save(carro);
         log.info("Carro atualizado: {}", carro);
