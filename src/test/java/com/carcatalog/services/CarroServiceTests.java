@@ -58,10 +58,11 @@ public class CarroServiceTests {
         Carro novoCarro = CarroFactory.carroAtualizar();
 
         when(repository.findById(id)).thenReturn(Optional.of(carroPersistido));
-        when(repository.save(novoCarro)).thenReturn(carroAtualizado);
+        when(repository.save(novoCarro)).thenReturn(carroPersistido);
 
         Carro atualizado = service.update(id, novoCarro);
 
+        assertNotEquals(CarroFactory.carroPersistido(), atualizado);
         assertEquals(carroAtualizado, atualizado);
     }
 
