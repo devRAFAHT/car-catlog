@@ -2,6 +2,7 @@ package com.carcatalog.service;
 
 import com.carcatalog.entity.Carro;
 import com.carcatalog.exception.CarAlreadyExistsException;
+import com.carcatalog.exception.DatabaseException;
 import com.carcatalog.exception.ResourceNotFoundException;
 import com.carcatalog.repository.CarroRepository;
 import lombok.RequiredArgsConstructor;
@@ -57,7 +58,7 @@ public class CarroService {
             log.info("Carro excluído com sucesso.");
         } catch (DataIntegrityViolationException e) {
             log.error("Erro ao excluir carro: {}", e.getMessage());
-            throw new RuntimeException("Erro de integridade ao excluir carro.");
+            throw new DatabaseException("Erro de integridade ao excluir carro.");
         }
     }
 
